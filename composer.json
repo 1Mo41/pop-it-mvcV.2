@@ -1,0 +1,21 @@
+{
+    "name": "1mo41/pop-it-mvc",
+    "description": "пнсс",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "po4ita"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": "^7.4 | ^8.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Src\\": "core/Src/",
+            "": "app/"
+        }
+    }
+}
