@@ -27,8 +27,3 @@ function app() {
 }
 
 return $app;
-
-require_once __DIR__ . '/../routes/web.php';
-
-return new Src\Application(new Src\Settings(getConfigs()));
-

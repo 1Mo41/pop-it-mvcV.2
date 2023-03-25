@@ -1,5 +1,7 @@
 <?php
+
 namespace Src\Auth;
+
 interface IdentityInterface
 {
     public function findIdentity(int $id);
@@ -8,4 +10,3 @@ interface IdentityInterface
 
     public function attemptIdentity(array $credentials);
 }
-
