@@ -1,4 +1,5 @@
 <?php
+//Включаем запрет на неявное преобразование типов
 declare(strict_types=1);
 
 try {
@@ -10,3 +11,4 @@ try {
     print_r($exception);
     echo '</pre>';
 }
+
