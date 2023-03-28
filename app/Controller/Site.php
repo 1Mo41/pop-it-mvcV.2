@@ -24,7 +24,7 @@ class Site
     public function signup(Request $request): string
     {
         if ($request->method === 'POST' && User::create($request->all())) {
-            app()->route->redirect('/go');
+            app()->route->redirect('/hello');
         }
         return new View('site.signup');
     }
@@ -51,7 +51,7 @@ class Site
     {
         //Если просто обращение к странице, то отобразить форму
         if ($request->method === 'POST' && Employees::create($request->all())) {
-        app()->route->redirect('/go');
+        app()->route->redirect('/add_personal');
     }{
             return new View('site.add_personal');
         }
