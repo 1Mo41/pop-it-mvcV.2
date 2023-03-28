@@ -6,6 +6,7 @@ use Model\Post;
 use Src\View;
 use Src\Request;
 use Model\User;
+use Model\Employees;
 use Src\Auth\Auth;
 class Site
 {
@@ -35,7 +36,7 @@ class Site
         }
         //Если удалось аутентифицировать пользователя, то редирект
         if (Auth::attempt($request->all())) {
-            app()->route->redirect('/hello');
+            app()->route->redirect('/add_personal');
         }
         //Если аутентификация не удалась, то сообщение об ошибке
         return new View('site.login', ['message' => 'Неправильные логин или пароль']);
@@ -46,7 +47,14 @@ class Site
         Auth::logout();
         app()->route->redirect('/hello');
     }
+    public function add_personal(Request $request): string
+    {
+        //Если просто обращение к странице, то отобразить форму
+        if ($request->method === 'POST' && Employees::create($request->all())) {
+        app()->route->redirect('/go');
+    }{
+            return new View('site.add_personal');
+        }
 
-
-
+    }
 }
