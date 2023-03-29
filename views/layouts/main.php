@@ -12,8 +12,8 @@
 <header>
     <nav class="header">
         <div class="User">
-            <a>Вы зашли под пользователем: <b>(<?= app()->auth::user()->name ?>)</b></a>
-            <a class="list" href="<?= app()->route->getUrl('/hello') ?>">Главная</a>
+
+
         </div>
         <div class="menu">
         <?php
@@ -24,7 +24,11 @@
         <?php
         else:
             ?>
+            <a>Вы зашли под пользователем: <b>(<?= app()->auth::user()->name ?>)</b></a>
+            <a  href="<?= app()->route->getUrl('/add_personal') ?>">Добавить сотрудника</a>
+            <a class="add" href="<?= app()->route->getUrl('/hello') ?>">Главная</a>
             <a class="vixod" href="<?= app()->route->getUrl('/logout') ?>">Выход </a>
+
         <?php
         endif;
         ?>

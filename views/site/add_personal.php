@@ -11,15 +11,16 @@
 <body>
 <main>
 <h2 class="centr">Добавить сотрудника</h2>
-<div class="zapros">
+
 <form method="post">
-    <label>ФИО <input type="text" name="ФИО"></label>
-    <label>Пол <input type="text" name="Пол"></label>
-    <label>Дата рождения<input type="date" name="Дата рождения"></label>
-    <label>Должность<input type="text" name="Должность"></label>
-    <label>Подразделение <input type="text" name="Подразделение"></label>
-    <label>Адрес <input type="text" name="Адрес"></label>
-    <label>age <input type="number" name="age"></label>
+    <div class="zapros">
+    <label>ФИО<br> <input type="text" name="ФИО"></label>
+    <label>Пол <br><input type="text" name="Пол"></label>
+    <label>Дата рождения<br><input type="date" name="birthday"></label>
+    <label>Должность <br><input type="text" name="Должность"></label>
+    <label>Подразделение <br><input type="text" name="Подразделение"></label>
+    <label>Адрес <br><input type="text" name="Адрес"></label>
+    <label>age<br> <input type="number" name="age"></label>
 
 
     <button>Добавить</button>

@@ -14,7 +14,7 @@ class Employees extends Model
     protected $fillable = [
         'ФИО',
         'Пол',
-        'Дата рождения',
+        'birthday',
         'Должность',
         'Подразделение',
         'Адрес',

@@ -10,16 +10,19 @@
 </head>
 <body>
 <main>
-<h2 class="centr">Добавить сотрудника</h2>
-<div class="zapros">
-<form method="get">
-    <label>ФИО <input type="text" name="ФИО"></label>
-    <label>Подразделение <input type="text" name="Подразделение"></label>
-    <label>Предприятие<input type="text" name="Предприятие"></label>
-    <label>Возраст<input type="number" name="age"></label>
-    <label>Состав <input type="text" name="compound"></label>
+<h2 class="centr">Вывод сотрудников</h2>
+<div class="vivod">
 
-    <button>Добавить</button>
+    <form action="select1.php" method="post">
+        <p><select size="3" multiple name="hero[]">
+                <option disabled>Выберите героя</option>
+                <option value="Чебурашка">Чебурашка</option>
+                <option selected value="Крокодил Гена">Крокодил Гена</option>
+                <option value="Шапокляк">Шапокляк</option>
+                <option value="Крыса Лариса">Крыса Лариса</option>
+            </select></p>
+        <p><input type="submit" value="Отправить"></p>
+    </form>
 </div>
 </form>
 </main>
