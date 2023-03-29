@@ -1,7 +1,10 @@
 <?php
 
 namespace Controller;
-
+use Model\Compound;
+use Model\Subdivision;
+use Model\Position;
+use Model\TypeS;
 use Model\Post;
 use Src\View;
 use Src\Request;
@@ -50,7 +53,8 @@ class Site
     public function add_personal(Request $request): string
     {
         //Если просто обращение к странице, то отобразить форму
-        if ($request->method === 'POST' && Employees::create($request->all())) {
+        if ($request->method === 'POST' && Employees::create($request->all()) && Compound::create($request->all()) && TypeS::create($request->all())
+            && Position::create($request->all()) && Subdivision::create($request->all())) {
         app()->route->redirect('/add_personal');
     }{
             return new View('site.add_personal');

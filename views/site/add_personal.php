@@ -19,8 +19,11 @@
     <label>Дата рождения<br><input type="date" name="birthday"></label>
     <label>Должность <br><input type="text" name="Должность"></label>
     <label>Подразделение <br><input type="text" name="Подразделение"></label>
+    <label>Вид подразделения<br><input type="text" name="ВидПодразделения"></label>
     <label>Адрес <br><input type="text" name="Адрес"></label>
     <label>age<br> <input type="number" name="age"></label>
+    <label>Состав<br> <input type="text" name="Состав"></label>
+
 
 
     <button>Добавить</button>

@@ -6,14 +6,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 
-class Compound extends Model
+class Subdivision extends Model
 {
     use HasFactory;
 
     public $timestamps = false;
     protected $fillable = [
-        'Состав',
+        'Подразделение',
+        'ВидПодразделения'
     ];
-protected $table = 'Compound';
 
+    protected $table = 'Subdivision';
 }
