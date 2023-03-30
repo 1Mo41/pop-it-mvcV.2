@@ -12,9 +12,11 @@
 <body>
 <main>
     <h2 class=centr>Регистрация нового пользователя</h2>
-    <h3><?= $message ?? ''; ?></h3>
+
     <form method="post" >
         <div class="reg">
+            <h3><?= $message ?? ''; ?></h3>
+            <input name="csrf_token" type="hidden" value="<?= app()->auth::generateCSRF() ?>"/>
         <label>Имя <br><input type="text" name="name"></label><br>
         <label>Логин<br> <input type="text" name="login"></label><br>
         <label>Пароль<br> <input type="password" name="password"></label><br><br>

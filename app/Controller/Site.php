@@ -11,6 +11,7 @@ use Src\Request;
 use Model\User;
 use Model\Employees;
 use Src\Auth\Auth;
+use Src\Validator\Validator;
 class Site
 {
     public function index(Request $request): string
@@ -26,11 +27,12 @@ class Site
 
     public function signup(Request $request): string
     {
-        if ($request->method === 'POST' && User::create($request->all())) {
-            app()->route->redirect('/hello');
+        if ($request->method==='POST' && User::create($request->all())){
+            return new View('site.signup', ['message'=>'Вы успешно зарегистрированы']);
         }
         return new View('site.signup');
     }
+
     public function login(Request $request): string
     {
         //Если просто обращение к странице, то отобразить форму
@@ -38,11 +40,13 @@ class Site
             return new View('site.login');
         }
         //Если удалось аутентифицировать пользователя, то редирект
-        if (Auth::attempt($request->all())) {
+        else if(Auth::attempt($request->all())) {
             app()->route->redirect('/hello');
+        }else {
+            //Если аутентификация не удалась, то сообщение об ошибке
+            return new View('site.login', ['message' => 'Неправильные логин или пароль']);
         }
-        //Если аутентификация не удалась, то сообщение об ошибке
-        return new View('site.login', ['message' => 'Неправильные логин или пароль']);
+
     }
 
     public function logout(): void
@@ -61,4 +65,6 @@ class Site
         }
 
     }
+
+
 }
