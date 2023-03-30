@@ -39,7 +39,7 @@ class Site
         }
         //Если удалось аутентифицировать пользователя, то редирект
         if (Auth::attempt($request->all())) {
-            app()->route->redirect('/add_personal');
+            app()->route->redirect('/hello');
         }
         //Если аутентификация не удалась, то сообщение об ошибке
         return new View('site.login', ['message' => 'Неправильные логин или пароль']);
@@ -55,7 +55,7 @@ class Site
         //Если просто обращение к странице, то отобразить форму
         if ($request->method === 'POST' && Employees::create($request->all()) && Compound::create($request->all()) && TypeS::create($request->all())
             && Position::create($request->all()) && Subdivision::create($request->all())) {
-        app()->route->redirect('/add_personal');
+        app()->route->redirect('/hello');
     }{
             return new View('site.add_personal');
         }
