@@ -10,21 +10,29 @@
 </head>
 <body>
 <main>
-<h2 class="centr">Вывод сотрудников</h2>
+<h2 class="centr">Поиск сотрудников</h2>
 
     <form method="get">
         <div class="zapros">
-            <label>ФИО<br> <input type="text" name="ФИО"></label>
-            <label>Подразделение <br><input type="text" name="Подразделение"></label>
-            <label>Предприятие <br><input type="text" name="Предприятие"></label>
-            <label>age<br> <input type="number" name="age"></label>
-            <label>Состав<br> <input type="text" name="НазваниеСостава"></label>
-            <label>Средний возраст<br> <input type="text" name="СреднийAge"></label>
 
-
-            <button>Вывести</button>
         </div>
     </form>
 </main>
+<?php
+if ($_FILES) {
+if (move_uploaded_file($_FILES['filename']['tmp_name'],
+'temp/' . $_FILES['filename']['name'])) {
+echo 'Файл успешно загружен';
+} else {
+echo 'Ошибка загрузки файла';
+}
+}
+?>
+<form method="post" enctype="multipart/form-data" action="glavnaya">
+    <h2>Форма для загрузки файлов</h2>
+    <input type="file" name="filename"><br>
+    <input type="submit" value="Отправить">
+</form>
+
 </body>
 </html>

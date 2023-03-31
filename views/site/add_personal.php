@@ -14,6 +14,7 @@
 
 <form method="post">
     <div class="zapros">
+        <input name="csrf_token" type="hidden" value="<?= app()->auth::generateCSRF() ?>"/>
     <label>ФИО<br> <input type="text" name="ФИО"></label>
     <label>Пол <br><input type="text" name="Пол"></label>
     <label>Дата рождения<br><input type="date" name="birthday"></label>

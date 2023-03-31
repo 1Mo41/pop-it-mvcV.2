@@ -65,6 +65,18 @@ class Site
         }
 
     }
+    public function proverka(Request $request): string
+    {
+        $employees=Employees::all();
+        if ($request->method === 'GET') {
+            return new View('site.proverka', ['employees'=>$employees]);
+        }
+        $averageAge = Employees::table('age')
+            ->avg('age');
+        return new View('site.proverka', ['averageAge'=>$averageAge]);
+
+    }
+
 
 
 }
