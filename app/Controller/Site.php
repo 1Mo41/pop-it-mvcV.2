@@ -3,6 +3,7 @@
 namespace Controller;
 use Illuminate\Database\Capsule\Manager as DB;
 use Model\Compound;
+use Model\pol;
 use Model\Subdivision;
 use Model\Position;
 use Model\TypeS;
@@ -60,23 +61,30 @@ class Site
         $subdivision = Subdivision::all();
         $position = Position::all();
         $compound = Compound::all();
+        $pols = pol::all();
         //Если просто обращение к странице, то отобразить форму
         if ($request->method === 'POST' && Employees::create($request->all())) {
         app()->route->redirect('/proverka');
         }
 
-        return new View('site.add_personal',['subdivision'=>$subdivision,'position'=>$position,'compound'=>$compound]);
+        return new View('site.add_personal',['subdivision'=>$subdivision,'position'=>$position,'compound'=>$compound,'pols'=>$pols]);
 
 
     }
     public function proverka(Request $request): string
     {
         $employees=Employees::all();
-        if ($request->method === 'GET') {
+        $emplo=DB::table('employees')
+            ->join('pol','employees.polID','=','pol.polID')
+            ->join('position','employees.ДолжностьID','=','position.ДолжностьID')
+            ->join('Compound','position.СоставID','=','Compound.СоставID')
+            ->select('employees.*', 'pol.*','position.*','Compound.*')
+            ->get();
+
             $agevivod = DB::table('employees')
                 ->avg('age');
-            return new View('site.proverka', ['employees'=>$employees,'agevivod'=>$agevivod]);
-        }
+            return new View('site.proverka', ['employees'=>$employees,'agevivod'=>$agevivod,'emplo'=>$emplo]);
+
 
 
     }

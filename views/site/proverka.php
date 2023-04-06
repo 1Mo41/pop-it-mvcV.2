@@ -6,7 +6,11 @@
         echo '<div class="column">';
         echo '<div class="colum">';
         echo '<p class="p">ФИО: ' . $employee->ФИО. '</p>';
-        echo '<p  class="p">Пол: ' . $employee->Пол. '</p>';
+        foreach ($emplo as $emp){
+            echo '<p  class="p">Пол: ' . $emp->НазваниеПола. '</p>';
+            echo '<p  class="p">Состав: ' . $emp->НазваниеСостава. '</p>';
+            echo '<p  class="p">Должность: ' . $emp->НазваниеДолжности. '</p>';
+        }
         echo '<p  class="p">Дата рождения: ' . $employee->birthday. '</p>';
         echo '<p  class="p">Адрес: ' . $employee->Адрес. '</p>';
         echo '<p  class="p">Возраст: ' . $employee->age. '</p>';

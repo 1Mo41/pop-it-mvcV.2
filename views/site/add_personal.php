@@ -16,7 +16,15 @@
     <div class="zapros">
         <input name="csrf_token" type="hidden" value="<?= app()->auth::generateCSRF() ?>"/>
     <label>ФИО<br> <input type="text" name="ФИО"></label>
-    <label>Пол <br><input type="text" name="Пол"></label>
+        <label >Пол
+            <select name="polID">
+                <?php
+                foreach ($pols as $pol){
+                    echo "<option value=\"$pol->polID\">" . $pol->НазваниеПола . '</option>';
+                }
+                ?>
+            </select>
+        </label>
     <label>Дата рождения<br><input type="date" name="birthday"></label>
         <label >Должность
         <select name="ДолжностьID">
