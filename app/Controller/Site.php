@@ -1,6 +1,7 @@
 <?php
 
 namespace Controller;
+use Illuminate\Database\Capsule\Manager as DB;
 use Model\Compound;
 use Model\Subdivision;
 use Model\Position;
@@ -56,27 +57,28 @@ class Site
     }
     public function add_personal(Request $request): string
     {
+        $subdivision = Subdivision::all();
+        $position = Position::all();
+        $compound = Compound::all();
         //Если просто обращение к странице, то отобразить форму
-        if ($request->method === 'POST' && Employees::create($request->all()) && Compound::create($request->all()) && TypeS::create($request->all())
-            && Position::create($request->all()) && Subdivision::create($request->all())) {
-        app()->route->redirect('/hello');
-    }{
-            return new View('site.add_personal');
+        if ($request->method === 'POST' && Employees::create($request->all())) {
+        app()->route->redirect('/proverka');
         }
+
+        return new View('site.add_personal',['subdivision'=>$subdivision,'position'=>$position,'compound'=>$compound]);
+
 
     }
     public function proverka(Request $request): string
     {
         $employees=Employees::all();
         if ($request->method === 'GET') {
-            return new View('site.proverka', ['employees'=>$employees]);
+            $agevivod = DB::table('employees')
+                ->avg('age');
+            return new View('site.proverka', ['employees'=>$employees,'agevivod'=>$agevivod]);
         }
-        $averageAge = Employees::table('age')
-            ->avg('age');
-        return new View('site.proverka', ['averageAge'=>$averageAge]);
+
 
     }
-
-
 
 }

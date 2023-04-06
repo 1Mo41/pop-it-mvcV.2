@@ -12,7 +12,7 @@ class TypeS extends Model
 
     public $timestamps = false;
     protected $fillable = [
-    'ВидПодразделения'
+    'name'
     ];
     protected $table = 'TypeS';
 

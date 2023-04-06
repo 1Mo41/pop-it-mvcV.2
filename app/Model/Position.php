@@ -12,8 +12,8 @@ class Position extends Model
 
     public $timestamps = false;
     protected $fillable = [
-        'Должность',
-        'Состав'
+        'НазваниеДолжности',
+        'СоставID '
     ];
 
     protected $table = 'position';

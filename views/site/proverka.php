@@ -1,6 +1,5 @@
 <h2 class="centr">Вывод </h2>
 <div class="vivodi">
-    <div class="colum">
 <ol>
     <?php
     foreach ($employees as $employee) {
@@ -16,13 +15,8 @@
     }
     ?>
 </ol>
-    </div>
 </div>
-
-
-
-    <?php
-        echo $averageAge;
-    ?>
-
+<?php
+    echo '<h2 class="centr">Средний Возраст: ' . $agevivod. '</h2>';
+?>
 

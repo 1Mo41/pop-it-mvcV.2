@@ -96,8 +96,8 @@ label{
 
 }
 .p{
-    float: left;
     color: white;
+    width: 300px;
 }
 .colum{
     display: flex;
@@ -107,4 +107,10 @@ label{
 .column{
     display: flex;
     justify-content: space-between;
+}
+select{
+    justify-content: center;
+    height: 40px;
+    width: 200px;
+    border-radius: 10px;
 }

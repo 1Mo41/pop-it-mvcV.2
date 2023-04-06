@@ -12,7 +12,7 @@ class Compound extends Model
 
     public $timestamps = false;
     protected $fillable = [
-        'Состав',
+        'НазваниеСостава',
     ];
 protected $table = 'Compound';
 
