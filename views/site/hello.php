@@ -9,21 +9,25 @@
     <title>Pop it MVC</title>
 </head>
 <body>
-<main>
-<h2 class="centr">Поиск сотрудников</h2>
+<main>    <div class="zaprosik">
+    <h2 class="centr">Поиск сотрудников</h2>
 
 
-                <form method="post" action="/pop-it-mvc/search" class="discipline">
-                    <input name="csrf_token" type="hidden" value="<?= app()->auth::generateCSRF() ?>"/>
-                    <div class="zapros">
-                    <input type="search" name="search1" required="required" placeholder="Состав">
-                    <input type="search" name="search2" required="required" placeholder="Подразделение">
-                    <button>Выбрать</button>
-                    </div>
-                </form>
-
-
+    <form method="post" action="/pop-it-mvc/search" class="discipline">
+        <input name="csrf_token" type="hidden" value="<?= app()->auth::generateCSRF() ?>"/>
+            <input type="search" name="search1" required="required" placeholder="Состав">
+            <button>Выбрать</button>
+    </form>
+    <form method="post" action="/pop-it-mvc/search1" class="discipline">
+        <input name="csrf_token" type="hidden" value="<?= app()->auth::generateCSRF() ?>"/>
+        <input type="search" name="search2" required="required" placeholder="Подразделение">
+        <button>Выбрать</button>
+    </form>
+    </div>
 </main>
+
+
+
 
 
 </body>

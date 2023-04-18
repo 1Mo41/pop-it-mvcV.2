@@ -25,8 +25,8 @@ class Site
 
     public function signup(Request $request): string
     {
-        if ($request->method==='POST' && User::create($request->all())){
-            return new View('site.signup', ['message'=>'Вы успешно зарегистрированы']);
+        if ($request->method === 'POST' && User::create($request->all())) {
+            return new View('site.signup', ['message' => 'Вы успешно зарегистрированы']);
         }
         return new View('site.signup');
     }
@@ -36,11 +36,10 @@ class Site
         //Если просто обращение к странице, то отобразить форму
         if ($request->method === 'GET') {
             return new View('site.login');
-        }
-        //Если удалось аутентифицировать пользователя, то редирект
-        else if(Auth::attempt($request->all())) {
+        } //Если удалось аутентифицировать пользователя, то редирект
+        else if (Auth::attempt($request->all())) {
             app()->route->redirect('/hello');
-        }else {
+        } else {
             //Если аутентификация не удалась, то сообщение об ошибке
             return new View('site.login', ['message' => 'Неправильные логин или пароль']);
         }
@@ -52,6 +51,7 @@ class Site
         Auth::logout();
         app()->route->redirect('/hello');
     }
+
     public function add_personal(Request $request): string
     {
         $subdivision = Subdivision::all();
@@ -60,57 +60,73 @@ class Site
         $pols = pol::all();
         //Если просто обращение к странице, то отобразить форму
         if ($request->method === 'POST' && Employees::create($request->all())) {
-        app()->route->redirect('/proverka');
+            app()->route->redirect('/proverka');
         }
 
-        return new View('site.add_personal',['subdivision'=>$subdivision,'position'=>$position,'compound'=>$compound,'pols'=>$pols]);
+        return new View('site.add_personal', ['subdivision' => $subdivision, 'position' => $position, 'compound' => $compound, 'pols' => $pols]);
 
 
     }
+
     public function proverka(Request $request): string
     {
-        $employees=Employees::all();
-        $emplo=DB::table('employees')
-            ->join('pol','employees.polID','=','pol.polID')
-            ->join('position','employees.ДолжностьID','=','position.ДолжностьID')
-            ->join('Compound','position.СоставID','=','Compound.СоставID')
+        $employees = Employees::all();
+        $emplo = DB::table('employees')
+            ->join('pol', 'employees.polID', '=', 'pol.polID')
+            ->join('position', 'employees.ДолжностьID', '=', 'position.ДолжностьID')
+            ->join('Compound', 'position.СоставID', '=', 'Compound.СоставID')
             ->join('Subdivision', 'employees.ПодразделениеID', '=', 'Subdivision.ПодразделениеID')
-            ->select('employees.*', 'pol.*','position.*','Compound.*','Subdivision.*')
+            ->select('employees.*', 'pol.*', 'position.*', 'Compound.*', 'Subdivision.*')
             ->get();
 
-            $agevivod = DB::table('employees')
-                ->avg('age');
-            return new View('site.proverka', ['employees'=>$employees,'agevivod'=>$agevivod,'emplo'=>$emplo]);
-
+        $agevivod = DB::table('employees')
+            ->avg('age');
+        return new View('site.proverka', ['employees' => $employees, 'agevivod' => $agevivod, 'emplo' => $emplo]);
 
 
     }
-    public  function search(Request $request)
+
+    public function search(Request $request)
     {
-        $employees=Employees::all();
+        $employees = Employees::all();
         $subdivision = Subdivision::all();
         $compound = Compound::all();
-//        $search = $request->all();
         $search1 = $request->all();
+        if (isset($search1['search1'])) {
+            $cartons = DB::table('employees')
+                ->join('position', 'employees.ДолжностьID', '=', 'position.ДолжностьID')
+                ->join('Compound', 'position.СоставID', '=', 'Compound.СоставID')
+                ->join('Subdivision', 'employees.ПодразделениеID', '=', 'Subdivision.ПодразделениеID')
+                ->where('Compound.НазваниеСостава', $search1['search1'])
+                ->get();
+        }
+        return (new View())->render('site.search', ['compound' => $compound, 'subdivision' => $subdivision, 'employees' => $employees, 'cartons' => $cartons]);
+    }
+
+    public function hello(Request $request): string
+    {
+        $subdivision = Subdivision::all();
+        $position = Position::all();
+        $compound = Compound::all();
+        return new View('site.hello', ['subdivision' => $subdivision, 'position' => $position, 'compound' => $compound]);
+    }
+
+    public function search1(Request $request)
+    {
+        $employees = Employees::all();
+        $subdivision = Subdivision::all();
+        $compound = Compound::all();
         $search2 = $request->all();
-//        $search3 = $request->all();
         if (isset($search2['search2'])) {
             $cartons = DB::table('employees')
                 ->join('position', 'employees.ДолжностьID', '=', 'position.ДолжностьID')
                 ->join('Compound', 'position.СоставID', '=', 'Compound.СоставID')
                 ->join('Subdivision', 'employees.ПодразделениеID', '=', 'Subdivision.ПодразделениеID')
-//                ->where('employees.ФИО', $search['search'])
-                ->where('Compound.НазваниеСостава', $search1['search1'])
                 ->where('Subdivision.Подразделение', $search2['search2'])
                 ->get();
         }
-        return (new View())->render('site.search', ['compound' => $compound, 'subdivision' => $subdivision,'employees' => $employees, 'cartons' => $cartons]);
+        return (new View())->render('site.search1', ['compound' => $compound, 'subdivision' => $subdivision, 'employees' => $employees, 'cartons' => $cartons]);
     }
-    public function  hello(Request $request):string
-    {
-        $subdivision = Subdivision::all();
-        $position = Position::all();
-        $compound = Compound::all();
-        return new View('site.hello',['subdivision'=>$subdivision,'position'=>$position,'compound'=>$compound]);
-    }
+
+
 }

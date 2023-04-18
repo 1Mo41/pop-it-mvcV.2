@@ -9,6 +9,7 @@ Route::add(['GET', 'POST'], '/add_personal', [Controller\Site::class, 'add_perso
     ->middleware('auth','admin');
 Route::add('GET', '/logout', [Controller\Site::class, 'logout']);
 Route::add(['POST','GET'], '/search', [Controller\Site::class, 'search']);
+Route::add(['POST','GET'], '/search1', [Controller\Site::class, 'search1']);
 Route::add(['GET','POST'], '/proverka', [Controller\Site::class, 'proverka'])
     ->middleware('auth',);
 
