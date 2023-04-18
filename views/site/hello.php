@@ -12,27 +12,19 @@
 <main>
 <h2 class="centr">Поиск сотрудников</h2>
 
-    <form method="get">
-        <div class="zapros">
 
-        </div>
-    </form>
+                <form method="post" action="/pop-it-mvc/search" class="discipline">
+                    <input name="csrf_token" type="hidden" value="<?= app()->auth::generateCSRF() ?>"/>
+                    <div class="zapros">
+                    <input type="search" name="search1" required="required" placeholder="Состав">
+                    <input type="search" name="search2" required="required" placeholder="Подразделение">
+                    <button>Выбрать</button>
+                    </div>
+                </form>
+
+
 </main>
-<?php
-if ($_FILES) {
-if (move_uploaded_file($_FILES['filename']['tmp_name'],
-'temp/' . $_FILES['filename']['name'])) {
-echo 'Файл успешно загружен';
-} else {
-echo 'Ошибка загрузки файла';
-}
-}
-?>
-<form method="post" enctype="multipart/form-data" action="glavnaya">
-    <h2>Форма для загрузки файлов</h2>
-    <input type="file" name="filename"><br>
-    <input type="submit" value="Отправить">
-</form>
+
 
 </body>
 </html>

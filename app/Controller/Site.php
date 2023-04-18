@@ -22,10 +22,6 @@ class Site
         return (new View())->render('site.post', ['posts' => $posts]);
     }
 
-    public function hello(): string
-    {
-        return new View('site.hello', ['message' => 'hello working']);
-    }
 
     public function signup(Request $request): string
     {
@@ -78,7 +74,8 @@ class Site
             ->join('pol','employees.polID','=','pol.polID')
             ->join('position','employees.ДолжностьID','=','position.ДолжностьID')
             ->join('Compound','position.СоставID','=','Compound.СоставID')
-            ->select('employees.*', 'pol.*','position.*','Compound.*')
+            ->join('Subdivision', 'employees.ПодразделениеID', '=', 'Subdivision.ПодразделениеID')
+            ->select('employees.*', 'pol.*','position.*','Compound.*','Subdivision.*')
             ->get();
 
             $agevivod = DB::table('employees')
@@ -88,5 +85,32 @@ class Site
 
 
     }
-
+    public  function search(Request $request)
+    {
+        $employees=Employees::all();
+        $subdivision = Subdivision::all();
+        $compound = Compound::all();
+//        $search = $request->all();
+        $search1 = $request->all();
+        $search2 = $request->all();
+//        $search3 = $request->all();
+        if (isset($search2['search2'])) {
+            $cartons = DB::table('employees')
+                ->join('position', 'employees.ДолжностьID', '=', 'position.ДолжностьID')
+                ->join('Compound', 'position.СоставID', '=', 'Compound.СоставID')
+                ->join('Subdivision', 'employees.ПодразделениеID', '=', 'Subdivision.ПодразделениеID')
+//                ->where('employees.ФИО', $search['search'])
+                ->where('Compound.НазваниеСостава', $search1['search1'])
+                ->where('Subdivision.Подразделение', $search2['search2'])
+                ->get();
+        }
+        return (new View())->render('site.search', ['compound' => $compound, 'subdivision' => $subdivision,'employees' => $employees, 'cartons' => $cartons]);
+    }
+    public function  hello(Request $request):string
+    {
+        $subdivision = Subdivision::all();
+        $position = Position::all();
+        $compound = Compound::all();
+        return new View('site.hello',['subdivision'=>$subdivision,'position'=>$position,'compound'=>$compound]);
+    }
 }
